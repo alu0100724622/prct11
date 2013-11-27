@@ -1,4 +1,4 @@
-#require "matriznyj/version"
+require "matriznyj/version"
 
 require "./fraccion.rb"
 
@@ -80,15 +80,13 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 	#== Metodo suma Densa
 	def +(other)
 		
-		#if ((other.class.to_s == "Densa") && (other.fil == @fil) && (other.col == @col))
+		if ((other.class.to_s == "Matriznyj::Densa") && (other.fil == @fil) && (other.col == @col))
 								
 			0.upto(@fil - 1) do |i| 
-
 				j = 0									
-				(@col - 1).times do
+				0.upto(@col - 1) do |j|
 					
 					@matrix[i][j] = @matrix[i][j] + other.matrix[i][j]
-					j += 1
 					
 				end
 				
@@ -97,15 +95,44 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 			#puts "#{@matrix}"
 			return @matrix
 			
-		#else
-			#raise ArgumentError, "Matrices de distinto tamanio"
-		#end
+		else
+			
+			i = 0								
+			
+			while i < @fil						
+				
+				j = 0
+				
+				while j < @col					
+					
+					k = 0
+					
+					while k < other.numElementos
+						
+						if (i == other.filM[k] && j == other.colM[k])
+							
+							@matrix[i][j] = @matrix[i][j] + other.eleM[k]
+							
+						end
+						
+						k += 1
+					end
+					
+					j += 1
+				end
+				
+				i += 1
+			end
+			
+			#puts "#{@matrix}"
+			return @matrix
+		end
 	end
 
 	#== Metodo resta Densa
 	def -(other)
 		
-		#if ((other.class.to_s == "Densa") && (other.fil == @fil) && (other.col == @col))
+		if ((other.class.to_s == "Matriznyj::Densa") && (other.fil == @fil) && (other.col == @col))
 				
 			0.upto(@fil - 1) do |i|				
 				0.upto(@col - 1) do |j|					
@@ -116,9 +143,38 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 			#puts "#{@matrix}"
 			return @matrix
 			
-		#else
-			#raise ArgumentError, "Matrices de distinto tamanio"
-		#end
+		else
+			
+			i = 0								
+			
+			while i < @fil						
+				
+				j = 0
+				
+				while j < @col					
+					
+					k = 0
+					
+					while k < other.numElementos
+						
+						if (i == other.filM[k] && j == other.colM[k])
+							
+							@matrix[i][j] = @matrix[i][j] - other.eleM[k]
+							
+						end
+						
+						k += 1
+					end
+					
+					j += 1
+				end
+				
+				i += 1
+			end
+			
+			#puts "#{@matrix}"
+			return @matrix
+		end
 	end
 	
 	#== Metodo producto Densa
@@ -136,12 +192,11 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 					matrizMult[i][j] = 0		
 					
 					k = 0					
-					(@col - 1).times {
+					0.upto(@col - 1) do |k| 
 						
 						matrizMult[i][j] = matrizMult[i][j] + (@matrix[i][k] * other.matrix[k][j])
-						k += 1
 						
-					}
+					end
 					
 				end
 				i += 1	
@@ -419,22 +474,20 @@ class Dispersa < Matriz
 			
 			i = 0
 			
-			(other.numElementos - 1).times {
+			0.upto(other.numElementos - 1) do |i|
 				
 				matrizResta[other.filM[i]][other.colM[i]] = 0 - other.eleM[i]
 				
-				i += 1
-			}
+			end
 			
 			
 			i = 0
 			
-			(@numElementos - 1).times {
+			0.upto(@numElementos - 1) do |i|
 				
 				matrizResta[@filM[i]][@colM[i]] += @eleM[i] 
 				
-				i += 1
-			}
+			end
 				
 			#puts "resta = #{matrizResta}"
 			return matrizResta

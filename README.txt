@@ -1,4 +1,4 @@
-**************** PRÁCTICA 10 - LENGUAJES Y PARADIGMAS DE PROGRAMACIÓN ******************
+**************** PRÁCTICA 11 - LENGUAJES Y PARADIGMAS DE PROGRAMACIÓN ******************
 
 Autores: 
 - Noelia Rodríguez Martín
@@ -6,10 +6,11 @@ Autores:
            
 OBJETIVO
 
-Acabar el código de las matrices densas y diespersas de la práctica pasada.
-Desarrollar métodos para calcular el máximo y el mínimo de los elementos de una matriz.
-Construit la gema (gem build).
-Considerar su publicación (gem push).
+Considere la Gema para la representación de Matrices que ha desarrollado en prácticas anteriores. Los objetivos de esta práctica son dos:
+Documentar la gema (utlizando RDOC).
+Desarrollar métodos con la filosofía de la programación funcional.
+Utilizar métodos como 'map/collect', 'inject/reduce', 'upto' o 'times' para implementar la suma y el producto de matrices.
+Generar la documentación de la Gema.
 
 CLASE MATRIZ (MADRE)
 
@@ -84,5 +85,17 @@ Debe: calcula la suma de dos matrices
 
 -- Método -(other) --
 Debe: calcula la resta de dos matrices 
+
+
+-- Método *(other) --
+Debe: calcula la multiplicación de dos matrices 
+
+
+CLASE FRACCIÓN
+
+-- Método coerce --
+Debe: suma un entero con una fracción y una fracción con un entero y fracción con fracción.
+
+
 
 

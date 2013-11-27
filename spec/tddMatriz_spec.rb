@@ -1,6 +1,6 @@
 
 require "rspec"
-require "./matriznyj.rb"
+require "matriznyj"
 include Matriznyj
 
 
@@ -88,6 +88,7 @@ describe "operaciones dispersas" do
 		@matriz2 = Dispersa.new(2,2,0,0,0,2)
 		@matriz3 = Dispersa.new(4,4,1,0,0,0,0,2,0,0,0,0,3,0,0,0,0,4)
 		@matriz4 = Dispersa.new(4,4,0,5,0,0,0,2,0,0,3,0,0,0,0,0,1,0)
+		@matriz5 = Dispersa.new(4,4,0,5,0,4,0,2,0,0,3,0,0,0,0,0,1,0)
 	end
 	
 	it "mostrando la suma" do
@@ -107,6 +108,12 @@ describe "operaciones dispersas" do
 		@matriz3 * @matriz4 == Dispersa.new(4,4,0,5,0,0,0,4,0,0,9,0,0,0,0,0,4,0)
 		
 	end
+	
+	it "mostrando la multiplicacion 2" do
+		
+		@matriz3 * @matriz5 == Dispersa.new(4,4,0,5,0,4,0,4,0,0,9,0,0,0,0,0,4,0)
+		
+	end	
 
 end
 

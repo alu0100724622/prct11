@@ -1,4 +1,4 @@
-**************** PRÁCTICA 11 - LENGUAJES Y PARADIGMAS DE PROGRAMACIÓN ******************
+**************** PRÁCTICA 11 - LENGUAJES Y PARADIGMAS DE PROGRAMACIÓN *****************
 
 Autores: 
 - Noelia Rodríguez Martín

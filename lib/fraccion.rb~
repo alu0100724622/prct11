@@ -84,10 +84,6 @@ class Fraccion
         #Metodo que suma dos fracciones con + y da el resultado de forma reducida
         
         def +(other)
-
-		if (other.is_a? Integer)
-			other = Fraccion.new(other,1)
-		end
                 return Fraccion.new((other.den * @num) + (@den * other.num), @den * other.den)
         end
         
@@ -104,10 +100,6 @@ class Fraccion
         #Metodo que multiplica dos fracciones con * y da el resultado de forma reducida
         
         def *(other)
-
-		if (other.is_a? Integer)
-			other = Fraccion.new(other,1)
-		end
                 return Fraccion.new(@num * other.num, @den * other.den)
         end
         
@@ -138,10 +130,5 @@ class Fraccion
 
         end 
 
-        #======================= METODO COERCE ========================
-        
-	def coerce(other)
-		return self, Fraccion.new(other,1)
-	end
         
 end

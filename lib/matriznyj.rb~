@@ -2,36 +2,28 @@
 
 require "./fraccion.rb"
 
-# = ejemplo_rdoc.rb
-#
-#Autor:: Noelia Rodriguez Martin y Juan Manuel Ramos Perez
-#
-# == Matriz## Descripcion:
-# - Definición de la clase Matriz y sus heredadas Densa y Dispersa
-# - Se Establecen las relaciones de herencia anteriormente expresadas
-#
-# - *rdoc*
-
 module Matriznyj
 
+#============================================================================
+#======================= CLASE MATRIZ (ABSTRACTA) ===========================
+#============================================================================
 
-# CLASE MATRIZ (ABSTRACTA)
-
-# Clase Matriz
 class Matriz
 
 end
 
 
-# CLASE MATRIZ DENSA
+#============================================================================
+#========================= CLASE MATRIZ DENSA ===============================
+#============================================================================
 
-#= Clase Densa
+
 class Densa < Matriz
 
 attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y realiza por defecto 
 														# un set y un get de dicha variable
 
-	#== Inicializacion Densa
+
 	def initialize(filas, columnas, *args)
 		
 		@fil = filas
@@ -47,7 +39,7 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 	end
 
 
-	#== Paso a string Densa
+
 	def to_s(*args)
 		
 		if args.length != @numCeldas
@@ -77,21 +69,25 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 		end
 	end
 	
-	#== Metodo suma Densa
+	
 	def +(other)
 		
 		#if ((other.class.to_s == "Densa") && (other.fil == @fil) && (other.col == @col))
-								
-			0.upto(@fil - 1) do |i| 
-
-				j = 0									
-				(@col - 1).times do
+			
+			i = 0								
+			
+			while i < @fil						
+				
+				j = 0
+				
+				while j < @col					
 					
 					@matrix[i][j] = @matrix[i][j] + other.matrix[i][j]
 					j += 1
 					
 				end
 				
+				i += 1
 			end
 			
 			#puts "#{@matrix}"
@@ -102,15 +98,25 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 		#end
 	end
 
-	#== Metodo resta Densa
+
 	def -(other)
 		
 		#if ((other.class.to_s == "Densa") && (other.fil == @fil) && (other.col == @col))
+			
+			i = 0								
+			
+			while i < @fil						
 				
-			0.upto(@fil - 1) do |i|				
-				0.upto(@col - 1) do |j|					
-					@matrix[i][j] = @matrix[i][j] - other.matrix[i][j]					
+				j = 0
+				
+				while j < @col					
+					
+					@matrix[i][j] = @matrix[i][j] - other.matrix[i][j]
+					j += 1
+					
 				end
+				
+				i += 1
 			end
 			
 			#puts "#{@matrix}"
@@ -121,31 +127,37 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 		#end
 	end
 	
-	#== Metodo producto Densa
+	
 	def *(other)
 		
 		#if ((other.class.to_s == "Densa") && (@fil == @col) && (other.fil == other.col) && (@fil == other.fil))
 			
 			matrizMult = Array.new(@fil) {Array.new(@col)}
+			i = 0								
 			
-			i = 0
-			(0..(@fil - 1)).collect {
-													
-				0.upto(@col - 1) do |j|
+			while i < @fil						
+				
+				j = 0
+				
+				while j < @col					
 					
 					matrizMult[i][j] = 0		
+					k = 0
 					
-					k = 0					
-					(@col - 1).times {
+					while k < @col				
 						
 						matrizMult[i][j] = matrizMult[i][j] + (@matrix[i][k] * other.matrix[k][j])
 						k += 1
 						
-					}
+					end
+					
+					j += 1
 					
 				end
-				i += 1	
-			}
+				
+				i += 1
+				
+			end
 			
 			#puts "#{matrizMult}"
 			return matrizMult
@@ -156,20 +168,17 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 		
 	end
 	
-	#== Metodo minimo Densa
 	def minimo
 		
 		min = @matrix[0][0]
 		
 		i = 0								
 		
-#		while i < @fil						
-		(@fil).times do
+		while i < @fil						
 			
 			j = 0
 			
-#			while j < @col					
-			(@col).times do
+			while j < @col					
 				
 				if(@matrix[i][j] < min)
 					
@@ -191,19 +200,19 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 		
 	end
 	
-	#== Metodo maximo Densa
+	
 	def maximo
 		
 		max = @matrix[0][0]
 		
 		i = 0								
 		
-#		while i < @fil						
-		(@fil).times do			
+		while i < @fil						
+			
 			j = 0
 			
-#			while j < @col					
-			(@col).times do				
+			while j < @col					
+				
 				if(@matrix[i][j] > max)
 					
 					max = @matrix[i][j]
@@ -227,14 +236,16 @@ attr_accessor :matrix, :fil, :col						# define una variable matrix, fil, col y 
 end
 
 
-# CLASE MATRIZ DISPERSA
+#============================================================================
+#======================= CLASE MATRIZ DISPERSA ==============================
+#============================================================================
 
-#= Clase Dispersa 
+
+
 class Dispersa < Matriz
 
 	attr_accessor :matrix, :fil, :col, :eleM, :filM, :colM, :numElementos
 
-	#== Inicializacion Dispersa 
 	def initialize(filas, columnas, *args)
 		
 		@fil = filas
@@ -283,8 +294,7 @@ class Dispersa < Matriz
 		
 		
 	end
-
-	#== Metodo calular fila - columna Dispersa
+	
 	def calcularFilCol(numElem)
 		
 		i = 0
@@ -314,7 +324,7 @@ class Dispersa < Matriz
 		
 	end
 	
-	#== Metodo minimo Dispersa
+	
 	def minimo
 		
 		min = 0
@@ -338,7 +348,7 @@ class Dispersa < Matriz
 		
 	end
 	
-	#== Metodo maximo Dispersa
+	
 	def maximo
 		
 		max = 0
@@ -362,7 +372,7 @@ class Dispersa < Matriz
 		
 	end
 
-	#== Paso a string Dispersa
+
 	def to_s
 		
 		matrizMuestra = Array.new(@fil) {Array.new(@col) {0}}
@@ -382,23 +392,30 @@ class Dispersa < Matriz
 		
 	end
 
-	#== Metodo suma Dispersa
+	
+
 	def +(other)
 		
 		#if ((other.class.to_s == "Dispersa") && (other.fil == @fil) && (other.col == @col))
 			
 			matrizSuma = Array.new(@fil) {Array.new(@col) {0}}
 			
-			0.upto(@numElementos - 1) do |i|
-
+			i = 0
+			
+			while i < @numElementos						
+				
 				matrizSuma[@filM[i]][@colM[i]] = @eleM[i]
-
+				
+				i += 1
 			end
 			
-			0.upto(other.numElementos - 1) do |i|				
+			i = 0
+			
+			while i < other.numElementos						
 				
 				matrizSuma[other.filM[i]][other.colM[i]] += other.eleM[i]
-
+				
+				i += 1
 			end
 			
 			
@@ -410,7 +427,7 @@ class Dispersa < Matriz
 		#end
 	end
 
-	#== Metodo resta Dispersa
+
 	def -(other)
 		
 		#if ((other.class.to_s == "Dispersa") && (other.fil == @fil) && (other.col == @col))
@@ -419,23 +436,24 @@ class Dispersa < Matriz
 			
 			i = 0
 			
-			(other.numElementos - 1).times {
+			while i < other.numElementos						
 				
 				matrizResta[other.filM[i]][other.colM[i]] = 0 - other.eleM[i]
 				
 				i += 1
-			}
+			end
 			
 			
 			i = 0
 			
-			(@numElementos - 1).times {
+			while i < @numElementos						
 				
 				matrizResta[@filM[i]][@colM[i]] += @eleM[i] 
 				
 				i += 1
-			}
-				
+			end
+			
+			
 			#puts "resta = #{matrizResta}"
 			return matrizResta
 			
@@ -444,29 +462,6 @@ class Dispersa < Matriz
 		#end
 	end
 
-	#== Metodo producto Dispersa
-	def *(other)
-
-		#if ((other.class.to_s == "Dispersa") && (other.fil == @fil) && (other.col == @col))
-			
-			matrizProd = Array.new(@fil) {Array.new(@col) {0}}			
-
-			0.upto(other.numElementos - 1) do |i|
-
-				if (other.filM[i] = @colM[i])
-					matrizProd[@filM[i]][@colM[i]] += @eleM[i] * other.eleM[i]
-				end
-
-			end			
-			
-			#puts "prod = #{matrizProd}"
-			return matrizProd
-			
-		#else
-			#raise ArgumentError, "Matrices de distinto tamanio"
-		#end
-		
-	end
 
 end
 end

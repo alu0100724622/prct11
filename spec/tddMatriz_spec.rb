@@ -27,8 +27,15 @@ describe "operaciones aritmeticas" do
 
 	before :each do
 		mat = [[Fraccion.new(1,2),2],[3,4]]
+		# Fraccion con fraccion
+#		@matriz0 = Densa.new(2,2,Fraccion.new(1,1),2,3,4)
+#		@matriz01 = Densa.new(2,2,Fraccion.new(1,1),1,1,1)
+		# Entero con fraccion
+#		@matriz0 = Densa.new(2,2,1,2,3,4)
+#		@matriz01 = Densa.new(2,2,Fraccion.new(1,1),1,1,1)
+		# Fraccion con entero
 		@matriz0 = Densa.new(2,2,Fraccion.new(1,1),2,3,4)
-		@matriz01 = Densa.new(2,2,Fraccion.new(1,1),1,1,1)
+		@matriz01 = Densa.new(2,2,1,1,1,1)
 		#mat2 = [[Fraccion.new(1,2).to_s,3],[4,5]]
 		
 		
@@ -79,6 +86,8 @@ describe "operaciones dispersas" do
 	before :each do
 		@matriz1 = Dispersa.new(2,2,0,0,0,1)
 		@matriz2 = Dispersa.new(2,2,0,0,0,2)
+		@matriz3 = Dispersa.new(4,4,1,0,0,0,0,2,0,0,0,0,3,0,0,0,0,4)
+		@matriz4 = Dispersa.new(4,4,0,5,0,0,0,2,0,0,3,0,0,0,0,0,1,0)
 	end
 	
 	it "mostrando la suma" do
@@ -90,6 +99,12 @@ describe "operaciones dispersas" do
 	it "mostrando la resta" do
 		
 		@matriz1 - @matriz2 == Dispersa.new(2,2,0,0,0,-1)
+		
+	end
+
+	it "mostrando la multiplicacion" do
+		
+		@matriz3 * @matriz4 == Dispersa.new(4,4,0,5,0,0,0,4,0,0,9,0,0,0,0,0,4,0)
 		
 	end
 
